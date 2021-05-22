@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  dbpostgresql:
+    image: "postgres"
+    ports:
+      - "5432"
+    environment:
+      POSTGRES_DB: payment
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      restart: unless-stopped
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: payment-service
+    ports:
+      - "9600:9600"
+    depends_on:
+      - dbpostgresql
+      - zookeeper-server
+      - kafka-server
+  zookeeper-server:
+    image: 'bitnami/zookeeper:latest'
+    networks:
+      - kafka-net
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka-server:
+    image: 'bitnami/kafka:latest'
+    networks:
+      - kafka-net
+    ports:
+      - '9092:9092'
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper-server:2181
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper-server
