@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM openjdk:17-jdk-alpine3.12
 
 ADD target/user-service.jar user-service.jar
 
