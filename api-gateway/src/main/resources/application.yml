@@ -8,7 +8,7 @@ server:
 eureka:
   client:
     fetch-registry: true
-    service-url:
+    serviceUrl:
       defaultZone: http://eureka-server.default.svc.cluster.local:8761/eureka
 
 ribbon:
