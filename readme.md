@@ -87,3 +87,7 @@ To create a pod that you can use as a Kafka client run the following commands:
 mvn package -DskipTests 
 eval $(minikube docker-env)
 docker build -t api-gateway:0.0.1 .
+
+# deploy 
+cd helm-chart
+helm upgrade --install apps .
