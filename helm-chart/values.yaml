@@ -1,0 +1,135 @@
+# Default values for helm-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+services:
+  api-gateway:
+    nameOverride: "api-gateway"
+    fullnameOverride: "api-gateway"
+    resources: {}
+    podSecurityContext: {}
+    replicaCount: 1
+    image:
+      repository: api-gateway
+      pullPolicy: Never #IfNotPresent
+      tag: "0.0.1"
+    service:
+      type: LoadBalancer
+      port: 8080
+
+  auth-service:
+    nameOverride: "auth-service"
+    fullnameOverride: "auth-service"
+    resources: {}
+    podSecurityContext: {}
+    replicaCount: 1
+    image:
+      repository: auth-service
+      pullPolicy: Never #IfNotPresent
+      tag: "0.0.1"
+    service:
+      type: LoadBalancer
+      port: 9100
+
+  cart-service:
+    nameOverride: "cart-service"
+    fullnameOverride: "cart-service"
+    resources: {}
+    podSecurityContext: {}
+    replicaCount: 1
+    image:
+      repository: cart-service
+      pullPolicy: Never #IfNotPresent
+      tag: "0.0.1"
+    service:
+      type: LoadBalancer
+      port: 9400
+
+  catalog-service:
+    nameOverride: "catalog-service"
+    fullnameOverride: "catalog-service"
+    resources: {}
+    podSecurityContext: {}
+    replicaCount: 1
+    image:
+      repository: catalog-service
+      pullPolicy: Never #IfNotPresent
+      tag: "0.0.1"
+    service:
+      type: LoadBalancer
+      port: 9200
+    
+  eureka-server:
+    nameOverride: "eureka-server"
+    fullnameOverride: "eureka-server"
+    resources: {}
+    podSecurityContext: {}
+    replicaCount: 1
+    image:
+      repository: eureka-server
+      pullPolicy: Never #IfNotPresent
+      tag: "0.0.1"
+    service:
+      type: LoadBalancer
+      port: 8761
+
+  order-service:
+    nameOverride: "order-service"
+    fullnameOverride: "order-service"
+    resources: {}
+    podSecurityContext: {}
+    replicaCount: 1
+    image:
+      repository: order-service
+      pullPolicy: Never #IfNotPresent
+      tag: "0.0.1"
+    service:
+      type: LoadBalancer
+      port: 9500
+
+  payment-service:
+    nameOverride: "payment-service"
+    fullnameOverride: "payment-service"
+    resources: {}
+    podSecurityContext: {}
+    replicaCount: 1
+    image:
+      repository: payment-service
+      pullPolicy: Never #IfNotPresent
+      tag: "0.0.1"
+    service:
+      type: LoadBalancer
+      port: 9600
+
+  user-service:
+    nameOverride: "user-service"
+    fullnameOverride: "user-service"
+    resources: {}
+    podSecurityContext: {}
+    replicaCount: 1
+    image:
+      repository: user-service
+      pullPolicy: Never #IfNotPresent
+      tag: "0.0.1"
+    service:
+      type: LoadBalancer
+      port: 9300
+
+#podAnnotations: {}
+
+
+  # fsGroup: 2000
+
+#securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

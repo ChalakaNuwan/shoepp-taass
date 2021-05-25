@@ -1,0 +1,36 @@
+{{- range $service, $val := .Values.services }}
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ $service }}
+  labels:
+    app: {{ $service }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ $service }}
+  template:
+    metadata:
+      labels:
+        app: {{ $service }}
+    spec:
+      {{- with .imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ $service }}
+          image: {{ .image.repository }}:{{ .image.tag }}
+          imagePullPolicy: {{ .image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .service.port }}
+              protocol: TCP
+          resources:
+            {{- toYaml .resources | nindent 12 }}
+
+{{- end }}
