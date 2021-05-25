@@ -53,24 +53,24 @@ zuul:
 
 auth-service:
   ribbon:
-    listOfServers: localhost:9100
+    listOfServers: auth-service.default.svc.cluster.local:9100
 
 catalog-service:
   ribbon:
-    listOfServers: localhost:9200
+    listOfServers: catalog-service.default.svc.cluster.local:9200
 
 user-service:
   ribbon:
-    listOfServers: localhost:9300
+    listOfServers: user-service.default.svc.cluster.local:9300
 
 cart-service:
   ribbon:
-    listOfServers: localhost:9400
+    listOfServers: cart-service.default.svc.cluster.local:9400
 
 order-service:
   ribbon:
-    listOfServers: localhost:9500
+    listOfServers: order-service.default.svc.cluster.local:9500
 
 payment-service:
   ribbon:
-    listOfServers: localhost:9600
+    listOfServers: payment-service.default.svc.cluster.local:9600
