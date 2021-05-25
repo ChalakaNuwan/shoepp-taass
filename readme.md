@@ -1,44 +1,20 @@
 # requirments 
-install go , kubectl and docker in your machine 
+install kubectl , docker , helm and minikube in your machine 
 
-# install kind in your machine 
+https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+https://helm.sh/docs/intro/install/
+https://minikube.sigs.k8s.io/docs/start/
+https://docs.docker.com/docker-for-windows/install/
 
-## On Linux:
+## minikube 
 
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.0/kind-linux-amd64
-chmod +x ./kind
-mv ./kind /some-dir-in-your-PATH/kind
-COPY
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.0/kind-linux-amd64
-chmod +x ./kind
-mv ./kind /some-dir-in-your-PATH/kind
+start the minikube 
 
-## On Mac (homebrew):
+minikube start 
 
-brew install kind
-COPY
-brew install kind
-or
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.0/kind-darwin-amd64
-COPY
-curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.0/kind-darwin-amd64
+in a differant terminal run 
 
-## On Windows:
-
-curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.11.0/kind-windows-amd64
-Move-Item .\kind-windows-amd64.exe c:\some-dir-in-your-PATH\kind.exe
-COPY
-curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.11.0/kind-windows-amd64
-Move-Item .\kind-windows-amd64.exe c:\some-dir-in-your-PATH\kind.exe
-On Windows via Chocolatey (https://chocolatey.org/packages/kind)
-
-choco install kind
-COPY
-choco install kind
-
-## create cluster 
-kind create cluster --config kind-config.yaml
-
+sudo minikube tunnel
 
 ## deploy postgresql 
 
@@ -109,4 +85,5 @@ To create a pod that you can use as a Kafka client run the following commands:
 # build apps 
 
 mvn package -DskipTests 
+eval $(minikube docker-env)
 docker build -t api-gateway:0.0.1 .
