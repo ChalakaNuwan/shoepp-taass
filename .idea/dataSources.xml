@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="users@localhost" uuid="cf7fc2b9-0234-46ed-87ff-775760acc46d">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/users</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="catalog@localhost" uuid="b9d6584d-042c-4262-a47c-0d65fa5c62d2">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/catalog</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="carts@localhost" uuid="625eab23-29af-4d9a-b849-2dda185709bf">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/carts</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="orders@localhost" uuid="3c592d9e-280a-4ef7-a653-8ec302be2169">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/orders</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="payments@localhost" uuid="65bea82b-901a-4538-a083-2889d1a51f18">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/payments</jdbc-url>
+    </data-source>
+  </component>
+</project>
