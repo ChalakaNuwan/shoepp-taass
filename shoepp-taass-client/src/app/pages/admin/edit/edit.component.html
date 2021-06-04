@@ -1,0 +1,89 @@
+<div class="container page-content">
+  <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Errore nella modifica del prodotto.</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+    <fieldset>
+      <legend class="center-block">
+        Modifica prodotto
+      </legend>
+        <div class="form-group row">
+          <label for="title" class="col-2 col-form-label text-right">Nome</label>
+          <div class="col-6">
+            <input [(ngModel)]="product.title" type="text" class="form-control" id="title" name="title" >
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="description" class="col-2 col-form-label text-right">Descrizione</label>
+          <div class="col-6">
+            <input [(ngModel)]="product.description" type="text" class="form-control" id="description" name="description">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-2 col-form-label text-right">Categoria</label>
+          <div class="col-6">
+            <tag-input [(ngModel)]="productCategories" [placeholder]="'+ Categoria'" [secondaryPlaceholder]="'+ Categoria'" [theme]="'bootstrap'" (onRemove)="onCategoryRemove($event)"></tag-input>
+          </div>
+          <div class="col-4">
+            <button type=button class="btn btn-primary btn-category badge badge-pill badge-primary mr-1 mb-1" *ngFor="let category of categories" (click)="addCategory(category)">{{category}}</button>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-2 col-form-label text-right">Taglia</label>
+          <div class="col-6">
+            <tag-input [(ngModel)]="productSizes" [placeholder]="'+ Taglia'" [secondaryPlaceholder]="'+ Taglia'" [theme]="'bootstrap'" (onRemove)="onSizeRemove($event)"></tag-input>
+          </div>
+          <div class="col-4">
+            <button type=button class="btn btn-primary btn-size" *ngFor="let size of sizes" (click)="addSize(size)">{{size}}</button>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-2 col-form-label text-right">Brand</label>
+          <div class="col-6">
+            <tag-input [(ngModel)]="productBrands" [placeholder]="'+ Brand'" [secondaryPlaceholder]="'+ Brand'" [theme]="'bootstrap'" (onRemove)="onBrandRemove($event)"></tag-input>
+          </div>
+          <div class="col-4">
+            <button type=button class="btn btn-primary btn-brand badge badge-pill badge-primary mr-1 mb-1" *ngFor="let brand of brands" (click)="addBrand(brand)">{{brand}}</button>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="price" class="col-2 col-form-label text-right">Prezzo</label>
+          <div class="col-6 input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">€</span>
+            </div>
+            <input [(ngModel)]="product.price" type="number" name="price" step="0.1" class="form-control" id="price" />
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="stock" class="col-2 col-form-label text-right">Disponibilità</label>
+          <div class="col-6">
+            <input [(ngModel)]="product.stock" type="number" name="stock" class="form-control" id="stock"/>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="picture" class="col-2 col-form-label text-right">URL immagine</label>
+          <div class="col-6">
+            <input [(ngModel)]="product.picture" type="text" class="form-control" id="picture" name="picture" >
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="offset-2 col-6">
+            <button type="submit" (click)="editProduct()" class="btn btn-success btn-space">Aggiorna prodotto</button>
+            <a class="btn btn-danger" href="/admin">Annulla</a>
+          </div>
+        </div>
+    </fieldset>
+</div>
+
+<style>.btn-space
+{
+  margin-right:0.5rem;
+}</style>

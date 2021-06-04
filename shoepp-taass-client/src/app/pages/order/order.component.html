@@ -1,0 +1,165 @@
+<div class="container page-content">
+  <div class="row">
+
+    <div class="col-md-4 col-lg-3">
+      <div class="card">
+        <div class="card-body text-center">
+          <img src="assets/images/user.png" width="100" height="100" alt="UserAuth" class="rounded-circle mb-3">
+          <h5 class="bold mb-0">Ciao {{user?.firstName}}!</h5>
+          <small class="text-secondary">Ultimo accesso {{currentDate | date:'dd MMM, yyyy'}}
+          </small>
+        </div>
+        <div class="list-group list-group-flush">
+          <a routerLink="/profile" class="list-group-item list-group-item-action"><i data-feather="user" class="mr-3"></i> Profilo</a>
+          <a routerLink="/orders" class="list-group-item list-group-item-action active"><i data-feather="shopping-bag" class="mr-3"></i> I miei ordini</a>
+          <a routerLink="/address" class="list-group-item list-group-item-action"><i data-feather="map" class="mr-3"></i> Indirizzo</a>
+          <a (click)="logout()" class="list-group-item list-group-item-action text-danger"><i data-feather="log-out" class="mr-3"></i> Esci</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col mt-3 mt-md-0">
+      <div class="card">
+        <div class="card">
+          <header class="card-header font-weight-bolder">ORD-{{order?.id.substr(20)}} del {{order?.date | date: 'dd MMM yyyy'}}</header>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <h6 class="text-muted font-weight-bold">Pagamento</h6>
+                <div [ngSwitch]="payment?.type">
+                  <span *ngSwitchCase="'PP'" class="text-success">PayPal</span>
+                  <span *ngSwitchCase="'CC'" class="text-success">{{payment.cardName}} **** {{payment.cardNumber.substring(payment.cardNumber.length-4, payment.cardNumber.length)}}</span>
+                </div>
+                <p>Subtotale articoli: {{order?.total}} €<br>
+                  Costi di spedizione: 0 €<br>
+                  <span class="font-weight-bold">Totale: {{order?.total}} €</span>
+                </p>
+
+              </div>
+              <div class="col-md-4">
+                <h6 class="text-muted font-weight-bold">Destinatario</h6>
+                <p>{{user?.firstName}} {{user?.lastName}}<br> +1234567890 <br> {{user?.email}}</p>
+              </div>
+              <div class="col-md-4">
+                <h6 class="text-muted font-weight-bold">Indirizzo di spedizione</h6>
+                <p>{{user?.address.streetAddress}}, <br>{{user?.address.city}}, {{user?.address.zipCode}},<br> {{user?.address.country}}</p>
+              </div>
+            </div>
+            <article class="card">
+              <div class="card-body row no-gutters">
+                <div class="col">
+                  <strong>Consegna prevista il:</strong> <br> {{this.shippingDate| date: 'dd MMM yyyy'}}
+                </div>
+                <div class="col">
+                  <strong>Spedito con:</strong> <br> SDA
+                </div>
+                <div class="col" [ngSwitch]="order?.orderStatus">
+                  <span *ngSwitchCase="'ORDER_CREATED'"><strong>Stato:</strong> <br> Creato</span>
+                  <span *ngSwitchCase="'ORDER_COMPLETED'"><strong>Stato:</strong> <br> Completato</span>
+                  <span *ngSwitchCase="'ORDER_CANCELLED'"><strong>Stato:</strong> <br> Cancellato</span>
+                </div>
+                <div class="col">
+                  <strong>Tracking #:</strong> <br> N/A
+                </div>
+              </div>
+            </article>
+
+            <div [ngSwitch]="order?.orderStatus">
+              <div *ngSwitchCase="'ORDER_CREATED'">
+                <div class="tracking-wrap">
+                  <div class="step active">
+                    <span class="icon"><img src="assets/images/icons/file-plus.svg"></span>
+                    <span class="text">Ordine creato</span>
+                  </div>
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/check_grey.svg"></span>
+                    <span class="text">Disponibile</span>
+                  </div>
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/dollar-sign_grey.svg"></span>
+                    <span class="text">Pagato</span>
+                  </div>
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/truck.svg"></span>
+                    <span class="text">Spedito</span>
+                  </div>
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/home.svg"></span>
+                    <span class="text">Consegnato</span>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngSwitchCase="'ORDER_COMPLETED'">
+                <div class="tracking-wrap">
+                  <div class="step active">
+                    <span class="icon"><img src="assets/images/icons/file-plus.svg"></span>
+                    <span class="text">Ordine creato</span>
+                  </div>
+                  <div class="step active">
+                    <span class="icon"><img src="assets/images/icons/check.svg"></span>
+                    <span class="text">Disponibile</span>
+                  </div>
+                  <div class="step active">
+                    <span class="icon"><img src="assets/images/icons/dollar-sign.svg"></span>
+                    <span class="text">Pagato</span>
+                  </div>
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/truck.svg"></span>
+                    <span class="text">Spedito</span>
+                  </div>
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/home.svg"></span>
+                    <span class="text">Consegnato</span>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngSwitchCase="'ORDER_CANCELLED'">
+                <div class="tracking-wrap">
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/file-plus.svg"></span>
+                    <span class="text">Ordine creato</span>
+                  </div>
+                  <div class="step error">
+                    <span class="icon"><img src="assets/images/icons/check.svg"></span>
+                    <span class="text">Non disponibile</span>
+                  </div>
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/dollar-sign_grey.svg.svg"></span>
+                    <span class="text">Pagato</span>
+                  </div>
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/truck.svg"></span>
+                    <span class="text">Spedito</span>
+                  </div>
+                  <div class="step">
+                    <span class="icon"><img src="assets/images/icons/home.svg"></span>
+                    <span class="text">Consegnato</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <hr>
+            <ul class="row">
+              <li class="col-md-4" *ngFor="let product of products; let indexOfelement=index;">
+                <figure class="itemside  mb-3">
+                  <div class="aside"><a href="/article/{{product.id}}"><img src="{{product.picture}}" class="img-sm border"></a></div>
+                  <figcaption class="info align-self-center">
+                    <p><a href="/article/{{product.id}}" class="title">{{product.title}}</a></p>
+                    <span style="color:#969696">{{order.products[indexOfelement].quantity}} x {{product.price}} €</span>
+                  </figcaption>
+                </figure>
+              </li>
+            </ul>
+
+            <a href="/orders" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Torna agli ordini</a>
+          </div> <!-- card-body.// -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div> <!--  end container -->
